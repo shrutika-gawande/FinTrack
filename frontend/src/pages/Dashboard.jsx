@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useModal } from '../context/ModalContext'
 import "../styles/dashboard.css"
 import SummaryCards from '../components/dashboard/SummaryCards'
 import DashDoughnutChart from '../components/dashboard/DashDoughnutChart'
@@ -8,8 +9,7 @@ import RecentActivity from '../components/dashboard/RecentActivity'
 import Modal from '../components/common/Modal'
 
 function Dashboard() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [type, setType] = useState("");
+  const { modal, type, openModal, closeModal} = useModal();
 
   return (
     <main className='main'>
@@ -20,18 +20,12 @@ function Dashboard() {
         </div>
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
           <button className='btn btn-ghost' style={{ borderColor: 'rgba(56,217,169,0.3', color: 'var(--green)' }}
-            onClick={() => {
-              setType("income");
-              setIsOpen(true);
-            }}
+            onClick={() => openModal("income")}
           >
             + Add Income
           </button>
           <button className='btn btn-primary'
-            onClick={() => {
-              setType("expense");
-              setIsOpen(true);
-            }}
+            onClick={() => openModal("expense")}
           >
             + Add Expense
           </button>
@@ -53,8 +47,8 @@ function Dashboard() {
 
     <Modal 
       type={type}
-      isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
+      isOpen={modal}
+      onClose={closeModal}
     />
 
     </main>
