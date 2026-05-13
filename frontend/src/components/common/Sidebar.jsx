@@ -1,8 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "../../styles/sidebar.css";
+import { useFinance } from "../../context/FinanceContext";
 
 function Sidebar() {
+
+const {incomes, expenses} = useFinance();
+
   return (
     <section className="sidebar">
       <div className="logo">
@@ -22,12 +26,12 @@ function Sidebar() {
         <NavLink to="/expense" className="nav-item">
           <span className="icon">📋</span>
           Expenses
-          <span className="badge">2</span>
+          <span className="badge">{expenses.length}</span>
         </NavLink>
         <NavLink to="/income" className="nav-item">
           <span className="icon">💵</span>
           Income
-          <span className="badge">2</span>
+          <span className="badge">{incomes.length}</span>
         </NavLink>
 
         <div className="nav-label">Manage</div>
