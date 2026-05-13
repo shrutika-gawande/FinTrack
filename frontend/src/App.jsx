@@ -10,10 +10,12 @@ import Budget from './pages/Budget';
 import Analytics from './pages/Analytics';
 import Settings from './pages/Settings';
 import { FinanceProvider } from './context/FinanceContext';
+import { ModalProvider } from './context/ModalContext';
 
 function App() {
   return (
     <BrowserRouter>
+    <ModalProvider>
     <FinanceProvider>
       <Toaster
         position="bottom-right"
@@ -31,6 +33,7 @@ function App() {
         </Route>
       </Routes>
       </FinanceProvider>
+      </ModalProvider>
     </BrowserRouter>
   )
 }
