@@ -1,12 +1,18 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import "../../styles/form.css";
+import { useFinance } from "../../context/FinanceContext";
+import { useModal } from "../../context/ModalContext";
 
 function IncomeForm() {
+const {addIncome} = useFinance();
+const { closeModal } = useModal();
+
   const [formData, setFormData] = useState({
     title: "",
     amount: "",
     date: "",
-    source: "salary",
+    source: "Salary",
     note: "",
   });
 
@@ -21,8 +27,10 @@ function IncomeForm() {
 
    const handleSubmit = (e) => {
     e.preventDefault()
-
-    console.log(formData)
+    toast.success("Income added successfully!");
+    addIncome(formData);
+    console.log(formData);
+    closeModal();
   }
 
   return (
@@ -64,13 +72,13 @@ function IncomeForm() {
           value={formData.source} 
           onChange={handleChange}
         >
-          <option value="salary">💼 Salary</option>
-          <option value="freelance">💻 Freelance</option>
-          <option value="business">🏢 Business</option>
-          <option value="investment">📈 Investment</option>
-          <option value="rental">🏠 Rental</option>
-          <option value="gift">🎁 Gift</option>
-          <option value="other">💰 Other</option>
+          <option value="Salary">💼 Salary</option>
+          <option value="Freelance">💻 Freelance</option>
+          <option value="Business">🏢 Business</option>
+          <option value="Investment">📈 Investment</option>
+          <option value="Rental">🏠 Rental</option>
+          <option value="Gift">🎁 Gift</option>
+          <option value="Other">💰 Other</option>
         </select>
       </div>
       <div className="field form-full">
@@ -83,12 +91,10 @@ function IncomeForm() {
         />
       </div>
       <button
-        className="btn btn-primary"
+        className="btn btn-success"
         style={{
           display: "block",
           width: "100%",
-          background: "var(--green)",
-          boxShadow: "0 4px 16px rgba(56,217,169,0.3)",
           marginTop: "10px",
         }}
       >

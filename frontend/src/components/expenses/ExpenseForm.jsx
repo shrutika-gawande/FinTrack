@@ -1,13 +1,18 @@
 import React, { useState } from 'react'
 import "../../styles/form.css"
+import toast from 'react-hot-toast';
+import { useFinance } from '../../context/FinanceContext';
+import { useModal } from '../../context/ModalContext';
 
 function ExpenseForm() {
+const {addExpense} = useFinance();
+const { closeModal } = useModal();
 
   const [formData, setFormData] = useState({
     title: "",
     amount: "",
     date: "",
-    category: "food",
+    category: "Food & Dining",
     note: ""
   })
 
@@ -22,8 +27,10 @@ function ExpenseForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    console.log(formData)
+    toast.success("Expense added successfully!")
+    addExpense(formData);
+    console.log(formData);
+    closeModal();
   }
 
   return (
@@ -76,35 +83,35 @@ function ExpenseForm() {
 
           <option value="">Select Category</option>
 
-          <option value="food">
+          <option value="Food & Dining">
             🍔 Food & Dining
           </option>
 
-          <option value="shopping">
+          <option value="Shopping">
             🛍️ Shopping
           </option>
 
-          <option value="travel">
+          <option value="Travel">
             ✈️ Travel
           </option>
 
-          <option value="entertainment">
+          <option value="Entertainment">
             🎮 Entertainment
           </option>
 
-          <option value="health">
+          <option value="Health">
             💊 Health
           </option>
 
-          <option value="utilities">
+          <option value="Utilities">
             ⚡ Utilities
           </option>
 
-          <option value="education">
+          <option value="Education">
             📚 Education
           </option>
 
-          <option value="other">
+          <option value="Other">
             📦 Other
           </option>
 
