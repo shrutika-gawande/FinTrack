@@ -1,6 +1,8 @@
 import React from 'react'
+import { useFinance } from '../../context/FinanceContext';
 
 function IncomeItem({ income }) {
+const {deleteIncome} = useFinance();
 
     const sourceIcons = {
         Salary: "💼",
@@ -20,6 +22,10 @@ function IncomeItem({ income }) {
                 <div className="expense-meta">{income.source} • {income.date}</div>
             </div>
             <div className="expense-amount" style={{ color: 'var(--green)' }}>&#8377;{income.amount}</div>
+            <div className="expense-actions">
+                <div className="icon-btn edit">✏️</div>
+                <div className="icon-btn del" onClick={()=>deleteIncome(income.id)}>🗑️</div>
+            </div>
         </div>
     )
 }
