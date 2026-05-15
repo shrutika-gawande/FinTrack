@@ -9,13 +9,13 @@ function SummaryCards() {
     <div className="summary-grid">
       <div className="summary-card" style={{ "--card-accent": "var(--green-bg)" }}>
         <div className='card-icon' style={{ background: "var(--green-bg)", color: "#38d9a9" }}>💵</div>
-        <div className='card-lable'>Total Income</div>
+        <div className='card-label'>Total Income</div>
         <div className='card-value' style={{ color: "#38d9a9" }}>&#8377;{totalIncome}</div>
         <div className='card-sub'>{incomes.length} entries this month</div>
       </div>
       <div className="summary-card" style={{ "--card-accent": "var(--red-bg)" }}>
         <div className='card-icon' style={{ background: "var(--red-bg)", color: "#ff6b8a" }}>💳</div>
-        <div className='card-lable'>Total Expenses</div>
+        <div className='card-label'>Total Expenses</div>
         <div className='card-value' style={{ color: "#ff6b8a" }}>&#8377;{totalExpense}</div>
         <div className='card-sub'>{expenses.length} transactions this month</div>
         <div className="card-bar">
@@ -24,7 +24,7 @@ function SummaryCards() {
       </div>
       <div className="summary-card" style={{ "--card-accent": "var(--accent-glow)" }}>
         <div className='card-icon' style={{ background: "var(--accent-glow)", color: "var(--accent2)" }}>🎯</div>
-        <div className='card-lable'>Remaining Budget</div>
+        <div className='card-label'>Remaining Budget</div>
         <div className='card-value' style={{ color: "var(--accent2)" }}>&#8377;5000</div>
         <div className='card-sub'>of 500 budget</div>
         <div className="card-bar">
@@ -40,7 +40,7 @@ function SummaryCards() {
           background: surplus ? "var(--green-bg)" : "var(--red-bg)",
           color: surplus ? "#38d9a9" : "#ff6b8a"
         }}>{surplus ? '📈' : '📉'}</div>
-        <div className='card-lable'>Net Savings</div>
+        <div className='card-label'>Net Savings</div>
         <div className='card-value' style={{ color: surplus ? "#38d9a9" : "#ff6b8a" }}>&#8377;{Math.abs(balance)}</div>
         <div className='card-sub'>{surplus ? "surplus" : "deficit"} this month</div>
       </div>
