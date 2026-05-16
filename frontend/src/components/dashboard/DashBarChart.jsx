@@ -52,7 +52,14 @@ function DashBarChart() {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { position: 'top' },
+      legend: {
+      position: 'top',
+      labels: {
+        usePointStyle: false,
+        boxWidth: 12,
+        boxHeight: 12,
+      }
+    },
       tooltip: {
         callbacks: {
           label: (ctx) => ` ₹${ctx.parsed.y}`
