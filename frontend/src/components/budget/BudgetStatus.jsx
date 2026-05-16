@@ -3,10 +3,7 @@ import BudgetMeter from './BudgetMeter'
 import { useFinance } from '../../context/FinanceContext'
 
 function BudgetStatus() {
-    const { budget, remainingBudget, totalExpense } = useFinance();
-
-    const rawPercentage = budget > 0 ? (totalExpense / budget) * 100 : 0;
-    const displayPercentage = Math.min(rawPercentage, 100).toFixed(1);
+    const { budget, remainingBudget, totalExpense,  rawPercentage,  displayPercentage } = useFinance();
 
     return (
         <div className="card">
