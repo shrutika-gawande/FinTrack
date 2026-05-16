@@ -14,6 +14,14 @@ function DashDoughnutChart() {
     maintainAspectRatio: false,
     cutout: '60%',
     plugins: {
+      legend: {
+      position: 'right',
+      labels: {
+        usePointStyle: false,
+        boxWidth: 12,
+        boxHeight: 12,
+      }
+    },
       tooltip: {
         callbacks: {
           label: (ctx) => ` ₹${ctx.parsed}`
@@ -21,12 +29,23 @@ function DashDoughnutChart() {
       }
     }
   }
+  
+    // Group expenses by category and sum amounts
+  const grouped = expenses.reduce((acc, e) => {
+    const cat = e.category;
+    acc[cat] = (acc[cat] || 0) + Number(e.amount);
+    return acc;
+  }, {});
+
+  const categories = Object.keys(grouped);
+  const amounts = Object.values(grouped);
+
   const data = {
-    labels: expenses.map((e) => e.category),
+    labels: categories,
     datasets: [
       {
         label: 'Spending',
-        data: expenses.map((e) => Number(e.amount)),
+        data: amounts,
         backgroundColor: [
           'rgba(56, 217, 169, 0.6)',
           'rgba(99, 102, 241, 0.6)',
