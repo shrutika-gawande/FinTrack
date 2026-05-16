@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 import { useFinance } from '../../context/FinanceContext'
 
 function BudgetForm() {
@@ -24,6 +25,7 @@ function BudgetForm() {
         setBudget(Number(inputValue));
         setError("");
         setInputValue("");
+        toast.success('Budget set!')
     };
 
     return (
