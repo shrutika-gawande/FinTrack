@@ -29,12 +29,14 @@ export function FinanceProvider({ children }) {
         localStorage.setItem("budget", budget);
     }, [budget]);
 
+    const generateId = () => `TXN-${Date.now().toString().slice(-6)}`;
+
     // ADD
     const addIncome = (entry) => {
-        setIncomes((prev) => [...prev, { id: Date.now(), ...entry }]);
+        setIncomes((prev) => [...prev, { id: generateId(), ...entry }]);
     };
     const addExpense = (entry) => {
-        setExpenses((prev) => [...prev, { id: Date.now(), ...entry }]);
+        setExpenses((prev) => [...prev, { id: generateId(), ...entry }]);
     };
 
     // DELETE
@@ -73,14 +75,13 @@ export function FinanceProvider({ children }) {
     const rawPercentage = budget > 0 ? (totalExpense / budget) * 100 : 0;
     const displayPercentage = Math.min(rawPercentage, 100).toFixed(1);
 
-    const recentActivity = [...incomes.map(i => ({ ...i, type: 'income' })),
+    const allTransactions = [...incomes.map(i => ({ ...i, type: 'income' })),
     ...expenses.map(e => ({ ...e, type: 'expense' }))]
-        .sort((a, b) => b.id - a.id) // newest first (id is Date.now())
-        .slice(0, 4);
+        .sort((a, b) => b.id - a.id); // newest first (id is Date.now())
 
     return (
         <FinanceContext.Provider
-            value={{ recentActivity, rawPercentage, displayPercentage, budget, setBudget, remainingBudget, totalIncome, addIncome, incomes, expenses, totalExpense, addExpense, balance, clearAll, deleteIncome, deleteExpense, editIncome, editExpense, }}
+            value={{ allTransactions, rawPercentage, displayPercentage, budget, setBudget, remainingBudget, totalIncome, addIncome, incomes, expenses, totalExpense, addExpense, balance, clearAll, deleteIncome, deleteExpense, editIncome, editExpense, }}
         >
             {children}
         </FinanceContext.Provider>
