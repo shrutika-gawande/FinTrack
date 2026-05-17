@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { CSVLink } from 'react-csv'
+import { incomeHeaders, expenseHeaders, allTransactionHeaders } from "../utils/csvHeaders";
 import "../styles/expense.css";
 import "../styles/searchFilter.css";
 import { useModal } from "../context/ModalContext";
@@ -34,7 +36,11 @@ function Income() {
           </div>
         </div>
         <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-          <button className="btn btn-ghost">CSV</button>
+          <CSVLink data={incomes} headers={incomeHeaders} filename="Incomes.csv">
+            <button className="btn btn-ghost">
+              ⬇ CSV
+            </button>
+          </CSVLink>
           <button
             className="btn btn-success"
             onClick={() => openModal("income")}

@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useModal } from '../context/ModalContext'
+import { CSVLink } from 'react-csv'
+import { incomeHeaders, expenseHeaders, allTransactionHeaders } from "../utils/csvHeaders";
 import "../styles/expense.css"
 import "../styles/searchFilter.css"
 import Modal from '../components/common/Modal';
@@ -10,8 +12,8 @@ import ExpenseFilterChips from '../components/expenses/ExpenseFilterChips';
 
 function Expense() {
 
-  const {type, modal, openModal, closeModal} = useModal();
-  const {expenses} = useFinance();
+  const { type, modal, openModal, closeModal } = useModal();
+  const { expenses } = useFinance();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCat, setSelectedCat] = useState("All");
@@ -23,7 +25,7 @@ function Expense() {
 
     return matchesSearch && matchesCat;
   })
-  
+
   return (
     <main className='main'>
       <header className='page-header'>
@@ -32,9 +34,11 @@ function Expense() {
           <div className="page-subtitle">{expenses.length} expenses recorded</div>
         </div>
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-          <button className='btn btn-ghost'>
-            CSV
-          </button>
+          <CSVLink data={expenses} headers={expenseHeaders} filename="Expenses.csv">
+            <button className='btn btn-ghost'>
+              ⬇ CSV
+            </button>
+          </CSVLink>
           <button className='btn btn-primary'
             onClick={() => openModal("expense")}
           >
@@ -44,15 +48,15 @@ function Expense() {
       </header>
 
       <section className='card'>
-        <ExpenseSearch 
-          searchTerm = {searchTerm}
-          setSearchTerm = {setSearchTerm}
+        <ExpenseSearch
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
         />
-        <ExpenseFilterChips 
-          setSelectedCat = {setSelectedCat}
+        <ExpenseFilterChips
+          setSelectedCat={setSelectedCat}
         />
-        <ExpenseList 
-          filteredItems = {filteredItems}
+        <ExpenseList
+          filteredItems={filteredItems}
         />
       </section>
 
