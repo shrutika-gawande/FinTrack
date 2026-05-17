@@ -1,14 +1,16 @@
 import React from "react";
 import "../styles/settings.css"
 import toast from 'react-hot-toast';
+import { CSVLink } from 'react-csv'
+import { incomeHeaders, expenseHeaders, allTransactionHeaders } from "../utils/csvHeaders";
 import { useFinance } from "../context/FinanceContext";
 
 function Settings() {
-  const { clearAll } = useFinance();
+  const { clearAll, allTransactions } = useFinance();
 
   const handleClick = () => {
     clearAll(),
-    toast.success("Data cleared!");
+      toast.success("Data cleared!");
   }
 
   return (
@@ -40,7 +42,9 @@ function Settings() {
               <div className="settings-label">Export to CSV</div>
               <div className="settings-desc">Download all expenses as a CSV file</div>
             </div>
-            <button className="btn btn-ghost btn-sm">Export</button>
+            <CSVLink data={allTransactions} headers={allTransactionHeaders} filename="All-transactions.csv">
+              <button className="btn btn-ghost btn-sm">Export</button>
+            </CSVLink>
           </div>
           <div className="settings-item">
             <div>
