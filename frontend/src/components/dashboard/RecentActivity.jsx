@@ -2,7 +2,7 @@ import React from 'react'
 import { useFinance } from '../../context/FinanceContext'
 
 function RecentActivity() {
-  const { recentActivity } = useFinance();
+  const { allTransactions } = useFinance();
 
   return (
     <div className="card">
@@ -10,8 +10,8 @@ function RecentActivity() {
         <div className="card-title">⚡ Recent Activity</div>
       </div>
       <div>
-        {recentActivity.map((item) => (
-          <div className="activity-item">
+        {allTransactions.slice(0, 4).map((item) => (
+          <div className="activity-item" key={item.id}>
             <div className="activity-dot" style={{background: item.type === 'income' ? 'var(--green)' : '#ff6b8a'}}></div>
             <div className="activity-text">{item.title}</div>
             <div className="activity-info">
